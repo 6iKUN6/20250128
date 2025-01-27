@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* :root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #ffffff;
+    --foreground: #171717;Failed to compile
+
+./src/css/globals.css
+Error evaluating Node.js code
+CssSyntaxError: H:\Project\next-demo\src\css\globals.css:1:1: The `border-border` class does not exist. If `border-border` is a custom class, make sure it is defined within a `@layer` directive.
+    [at Input.error (turbopack://[project]/node_modules/.pnpm/postcss@8.5.1/node_modules/postcss/lib/input.js:109:16)]
+    [at AtRule.error (turbopack://[project]/node_modules/.pnpm/postcss@8.5.1/node_modules/postcss/lib/node.js:145:32)]
+    [at processApply (H:\Project\next-demo\node_modules\.pnpm\tailwindcss@3.4.17\node_modules\tailwindcss\lib\lib\expandApplyAtRules.js:380:29)]
+    [at H:\Project\next-demo\node_modules\.pnpm\tailwindcss@3.4.17\node_modules\tailwindcss\lib\lib\expandApplyAtRules.js:551:9]
+    [at H:\Project\next-demo\node_modules\.pnpm\tailwindcss@3.4.17\node_modules\tailwindcss\lib\processTailwindFeatures.js:55:50]
+    [at async plugins (H:\Project\next-demo\node_modules\.pnpm\tailwindcss@3.4.17\node_modules\tailwindcss\lib\plugin.js:38:17)]
+    [at LazyResult.runAsync (turbopack://[project]/node_modules/.pnpm/postcss@8.5.1/node_modules/postcss/lib/lazy-result.js:261:11)]
+    [at transform (turbopack://[project]/postcss.config.mjs/transform.ts:79:34)]
+    [at run (turbopack://[turbopack-node]/ipc/evaluate.ts:92:23)]
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+} */
+
+.no-select {
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+/Edge */
+  user-select: none;
+  /* Standard */
+}
+
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 47.4% 11.2%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47.4% 11.2%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 210 40% 98%;
+    --ring: 215 20.2% 65.1%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+    --muted: 223 47% 11%;
+    --muted-foreground: 215.4 16.3% 56.9%;
+    --accent: 216 34% 17%;
+    --accent-foreground: 210 40% 98%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 215 20.2% 65.1%;
+    --border: 216 34% 17%;
+    --input: 216 34% 17%;
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 1.2%;
+    --secondary: 222.2 47.4% 11.2%;
+    --secondary-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --ring: 216 34% 17%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
