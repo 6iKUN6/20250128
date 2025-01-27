@@ -4,6 +4,7 @@ import { Document, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 import { RxZoomIn, RxZoomOut } from "react-icons/rx";
+import { PDFDocument, degrees } from "pdf-lib";
 import SinglePage from "../singlePage";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
@@ -82,6 +83,39 @@ const PdfComp: FC<PdfCompProps> = ({ pdfFile, onRemoveFile }) => {
     );
   }, []);
 
+  const handleDownload = async () => {
+    try {
+      // 将File对象转换为ArrayBuffer
+      const arrayBuffer = await pdfFile.arrayBuffer();
+      // 加载PDF文档
+      const pdfDoc = await PDFDocument.load(arrayBuffer);
+      // 获取所有页面
+      const pages = pdfDoc.getPages();
+      // 应用旋转到每一页
+      pages.forEach((page, index) => {
+        const userRotation = rotations[index] || 0;
+        // 转换为PDF逆时针角度（用户界面为顺时针）
+        const pdfRotation = (360 - (userRotation % 360)) % 360;
+        page.setRotation(degrees(pdfRotation));
+      });
+      // 生成修改后的PDF字节
+      const pdfBytes = await pdfDoc.save();
+      // 创建并触发下载
+      const blob = new Blob([pdfBytes], { type: "application/pdf" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = pdfFile.name.replace(/\.pdf$/i, "_rotated.pdf");
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("下载失败:", error);
+      alert("下载失败，请重试。");
+    }
+  };
+
   return (
     <div>
       <div className="flex justify-center items-center space-x-3 selecto-ignore">
@@ -140,6 +174,7 @@ const PdfComp: FC<PdfCompProps> = ({ pdfFile, onRemoveFile }) => {
         className={`mt-10 mb-0 mx-auto block text-center bg-[#ff612f] text-[#fff] rounded px-[12px] py-[10px] ${
           pdfFile && loadDone ? "" : "hidden"
         }`}
+        onClick={handleDownload}
       >
         Download
       </button>
