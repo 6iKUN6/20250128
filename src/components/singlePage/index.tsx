@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 import { FC, memo } from "react";
 import { Page } from "react-pdf";
 import { TbRefresh } from "react-icons/tb";
